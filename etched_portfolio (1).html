@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rida Siddiqi — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #FAFAF8; --surface: #FFFFFF; --ink: #1A1A1A; --ink-secondary: #5A5A58; --ink-tertiary: #8A8A86;
+  --accent: #2D5BFF; --accent-light: #E8EDFF; --accent-dark: #1E3DB8;
+  --border: #E8E8E4; --border-hover: #D0D0CC; --tag-bg: #F0F0EC;
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.06); --radius-sm: 6px; --radius-md: 12px;
+  --font-display: 'DM Serif Display', Georgia, serif; --font-body: 'DM Sans', -apple-system, sans-serif; --font-mono: 'JetBrains Mono', monospace;
+  --max-w: 1080px; --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--ink); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+.site-header { position: sticky; top: 0; z-index: 100; background: rgba(250,250,248,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+.header-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.site-logo { font-family: var(--font-display); font-size: 1.25rem; color: var(--ink); text-decoration: none; letter-spacing: -0.02em; }
+.site-logo span { color: var(--accent); }
+.tab-nav { display: flex; gap: 0.25rem; }
+.tab-btn { font-family: var(--font-body); font-size: 0.82rem; font-weight: 500; color: var(--ink-secondary); background: none; border: none; padding: 0.5rem 1rem; cursor: pointer; border-radius: var(--radius-sm); transition: all 0.2s var(--ease); letter-spacing: 0.01em; }
+.tab-btn:hover { color: var(--ink); background: var(--tag-bg); }
+.tab-btn.active { color: var(--accent-dark); background: var(--accent-light); font-weight: 600; }
+.hero { max-width: var(--max-w); margin: 0 auto; padding: 5rem 2rem 3rem; }
+.hero-eyebrow { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1rem; }
+.hero h1 { font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 1.15; letter-spacing: -0.025em; max-width: 700px; margin-bottom: 1.5rem; }
+.hero-desc { font-size: 1.05rem; color: var(--ink-secondary); max-width: 600px; line-height: 1.7; margin-bottom: 2rem; }
+.hero-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.hero-link { font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-secondary); text-decoration: none; padding: 0.4rem 0.9rem; border: 1px solid var(--border); border-radius: 100px; transition: all 0.2s var(--ease); }
+.hero-link:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+.main { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem 6rem; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; animation: fadeUp 0.4s var(--ease) both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.section-label { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; color: var(--accent); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 0.5rem; }
+.section-title { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.section-desc { color: var(--ink-secondary); font-size: 0.95rem; max-width: 560px; margin-bottom: 2.5rem; line-height: 1.7; }
+.section-block { margin-bottom: 4rem; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.75rem; transition: all 0.3s var(--ease); overflow: hidden; }
+.card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.card-icon { width: 40px; height: 40px; border-radius: var(--radius-sm); background: var(--accent-light); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; font-family: var(--font-mono); margin-bottom: 1rem; }
+.card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+.card p { font-size: 0.88rem; color: var(--ink-secondary); line-height: 1.65; margin-bottom: 1rem; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.tag { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500; color: var(--ink-tertiary); background: var(--tag-bg); padding: 0.2rem 0.6rem; border-radius: 100px; letter-spacing: 0.02em; }
+.tag.accent { background: var(--accent-light); color: var(--accent-dark); }
+.carousel-wrapper { position: relative; overflow: hidden; }
+.carousel-track { display: flex; transition: transform 0.5s var(--ease); }
+.carousel-slide { min-width: 100%; padding: 0 0.5rem; }
+.carousel-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; }
+.carousel-dots { display: flex; gap: 0.5rem; }
+.carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); border: none; cursor: pointer; transition: all 0.2s var(--ease); }
+.carousel-dot.active { background: var(--accent); width: 24px; border-radius: 4px; }
+.carousel-arrows { display: flex; gap: 0.5rem; }
+.carousel-arrow { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--ink-secondary); transition: all 0.2s var(--ease); }
+.carousel-arrow:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+.carousel-arrow:disabled { opacity: 0.3; cursor: default; }
+.carousel-arrow:disabled:hover { border-color: var(--border); color: var(--ink-secondary); background: var(--surface); }
+.slide-counter { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-tertiary); }
+.teardown-full { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+.teardown-top { padding: 2rem 2rem 1.25rem; border-bottom: 1px solid var(--border); }
+.teardown-top h3 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 0.25rem; }
+.teardown-top .subtitle { font-size: 0.85rem; color: var(--ink-tertiary); margin-bottom: 1rem; }
+.teardown-top .product-context { font-size: 0.88rem; color: var(--ink-secondary); line-height: 1.65; }
+.teardown-body { padding: 1.5rem 2rem 2rem; }
+.teardown-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.teardown-section { margin-bottom: 1.25rem; }
+.teardown-section:last-child { margin-bottom: 0; }
+.teardown-section h4 { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 500; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+.teardown-section p, .teardown-section ul { font-size: 0.85rem; color: var(--ink-secondary); line-height: 1.65; }
+.teardown-section ul { padding-left: 1.1rem; }
+.teardown-section li { margin-bottom: 0.35rem; }
+.method-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; margin-bottom: 2rem; }
+.method-badge { display: flex; align-items: center; gap: 0.45rem; font-size: 0.8rem; font-weight: 500; color: var(--ink-secondary); background: var(--surface); border: 1px solid var(--border); border-radius: 100px; padding: 0.45rem 1rem; transition: all 0.2s var(--ease); }
+.method-badge:hover { border-color: var(--accent); color: var(--accent); }
+.method-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.callout { background: linear-gradient(135deg, var(--accent-light) 0%, #F0F4FF 100%); border: 1px solid #C8D6FF; border-radius: var(--radius-md); padding: 1.5rem 1.75rem; margin-top: 2rem; }
+.callout h4 { font-size: 0.95rem; font-weight: 600; color: var(--accent-dark); margin-bottom: 0.5rem; }
+.callout p { font-size: 0.85rem; color: var(--ink-secondary); line-height: 1.65; }
+.callout.green { background: linear-gradient(135deg, #E8F5E8 0%, #F5FAF5 100%); border-color: #C8DCC8; }
+.callout.green h4 { color: #3D6B3D; }
+.framework-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.75rem; margin-bottom: 1.25rem; }
+.framework-block h4 { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+.framework-block p { font-size: 0.88rem; color: var(--ink-secondary); line-height: 1.65; }
+sup.ref { font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent); cursor: pointer; text-decoration: none; font-weight: 600; margin-left: 1px; }
+sup.ref:hover { text-decoration: underline; }
+.references { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+.references h3 { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 1.25rem; }
+.ref-list { list-style: none; padding: 0; counter-reset: ref-counter; }
+.ref-list li { font-size: 0.78rem; color: var(--ink-secondary); line-height: 1.6; margin-bottom: 0.75rem; padding-left: 2rem; position: relative; }
+.ref-list li::before { counter-increment: ref-counter; content: counter(ref-counter) "."; position: absolute; left: 0; font-family: var(--font-mono); font-weight: 600; color: var(--accent); font-size: 0.72rem; }
+.ref-list a { color: var(--accent-dark); text-decoration: none; word-break: break-all; }
+.ref-list a:hover { text-decoration: underline; }
+.competitive-matrix { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 2rem; margin: 2rem 0; }
+.matrix-visual { position: relative; aspect-ratio: 16/10; background: linear-gradient(135deg, #F8FAFC 0%, var(--accent-light) 100%); border-radius: var(--radius-sm); border: 1px solid var(--border); overflow: hidden; }
+.matrix-line { position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--border); }
+.matrix-line-v { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--border); }
+.matrix-dot { position: absolute; width: 12px; height: 12px; border-radius: 50%; transform: translate(-50%, -50%); }
+.matrix-dot-label { position: absolute; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 600; transform: translate(-50%, -150%); white-space: nowrap; }
+.mlabel { position: absolute; font-family: var(--font-mono); font-size: 0.55rem; color: var(--ink-tertiary); }
+.site-footer { max-width: var(--max-w); margin: 0 auto; padding: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.site-footer p { font-size: 0.78rem; color: var(--ink-tertiary); }
+.site-footer a { color: var(--ink-tertiary); text-decoration: none; }
+@media (max-width: 700px) {
+  .header-inner { flex-direction: column; height: auto; padding: 0.75rem 1rem; gap: 0.5rem; }
+  .tab-nav { overflow-x: auto; width: 100%; justify-content: flex-start; padding-bottom: 0.25rem; }
+  .tab-btn { white-space: nowrap; font-size: 0.78rem; padding: 0.4rem 0.75rem; }
+  .hero { padding: 3rem 1.25rem 2rem; }
+  .hero h1 { font-size: 2rem; }
+  .main { padding: 0 1.25rem 4rem; }
+  .card-grid { grid-template-columns: 1fr; }
+  .teardown-cols { grid-template-columns: 1fr; }
+  .site-footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  .teardown-top, .teardown-body { padding-left: 1.25rem; padding-right: 1.25rem; }
+}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+  <a href="#" class="site-logo">Rida<span>.</span></a>
+  <nav class="tab-nav">
+    <button class="tab-btn active" data-tab="about">About</button>
+    <button class="tab-btn" data-tab="teardowns">AI Hardware Analysis</button>
+    <button class="tab-btn" data-tab="landscape">Market Landscape</button>
+    <button class="tab-btn" data-tab="convergence">Architecture Trends</button>
+    <button class="tab-btn" data-tab="projects">Academic Projects</button>
+    <button class="tab-btn" data-tab="leadership">Leadership</button>
+  </nav>
+</div></header>
+
+<section class="hero">
+  <p class="hero-eyebrow">Physics · AI Infrastructure · Strategic Analysis</p>
+  <h1>From physics to AI infrastructure — applying scientific rigor to the hardware layer.</h1>
+  <p class="hero-desc">Recent B.S. Computational Physics graduate from UT Austin with experience driving cross-functional programs, conducting research, and translating complex technical concepts. Exploring the AI inference hardware landscape and market dynamics.</p>
+  <div class="hero-links">
+    <a href="mailto:siddiqirida3@gmail.com" class="hero-link">Email</a>
+    <a href="https://github.com/r-siddiqi?tab=repositories" class="hero-link">GitHub</a>
+  </div>
+</section>
+
+<main class="main">
+
+<!-- ABOUT -->
+<div class="tab-panel active" id="about">
+  <div class="section-block"><p class="section-label">Background</p><h2 class="section-title">Physics to Infrastructure</h2><p class="section-desc">Four years of applying physics thinking — hypothesis-driven analysis, experimental iteration, quantitative reasoning — to building programs and understanding complex systems. Now applying that lens to AI infrastructure and semiconductor markets.</p></div>
+  <div class="section-block"><p class="section-label">Education</p><h2 class="section-title">The University of Texas at Austin</h2>
+    <div style="color:var(--ink-secondary); font-size:0.92rem; margin-bottom:1.5rem; line-height:1.7;"><strong style="color:var(--ink)">B.S. Physics</strong>, Certificate in Elements of Computing & Applied Statistical Modeling · May 2026</div>
+    <div class="card-tags" style="margin-bottom:1.5rem;"><span class="tag">Computational Physics</span><span class="tag">Fine Tuning LLMs</span><span class="tag">Data Visualization</span><span class="tag">Databases</span><span class="tag">Applied Stats</span><span class="tag">SWE</span></div>
+  </div>
+  <div class="section-block"><p class="section-label">Skills</p><h2 class="section-title">Technical & Strategic</h2>
+    <div class="card-grid">
+      <div class="card"><div class="card-icon">T</div><h3>Technical</h3><p>Python, R, data visualization and analysis, machine learning, databases, cloud platforms (AWS, Google Cloud). Research experience in biophysics and computational modeling.</p><div class="card-tags"><span class="tag">Python</span><span class="tag">R</span><span class="tag">ML</span><span class="tag">AWS</span><span class="tag">Research</span></div></div>
+      <div class="card"><div class="card-icon">S</div><h3>Strategic & Operational</h3><p>Program management, competitive analysis, market research, cross-functional coordination, technical writing, stakeholder communication.</p><div class="card-tags"><span class="tag">Strategy</span><span class="tag">Market Analysis</span><span class="tag">Operations</span></div></div>
+    </div>
+  </div>
+  <div class="section-block"><p class="section-label">Recognition</p><h2 class="section-title">Honors</h2>
+    <div style="display:flex; flex-direction:column; gap:0.75rem;">
+      <div class="card" style="padding:1.25rem 1.5rem;"><h3 style="font-size:0.95rem;">Walter E. Millett Endowed Scholarship in Physics</h3><p style="font-size:0.8rem; margin:0;">2023–2024</p></div>
+      <div class="card" style="padding:1.25rem 1.5rem;"><h3 style="font-size:0.95rem;">Cactus Yearbook Standout Award</h3><p style="font-size:0.8rem; margin:0;">1 of 2 university-wide undergraduate leaders selected · 2023</p></div>
+      <div class="card" style="padding:1.25rem 1.5rem;"><h3 style="font-size:0.95rem;">Texas Excellence in Jobs and Services Award</h3><p style="font-size:0.8rem; margin:0;">1 of 30 undergraduates selected for stipend-funded research assistantship · 2022–2023</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- AI HARDWARE TEARDOWNS -->
+<div class="tab-panel" id="teardowns">
+  <div class="section-block"><p class="section-label">AI Inference Hardware</p><h2 class="section-title">Competitive Hardware Teardowns</h2><p class="section-desc">Technical and strategic analysis of competing AI inference solutions — architecture, performance, strategic tradeoffs, and where Etched's Sohu ASIC fits in.</p></div>
+  <div class="method-row"><div class="method-badge"><span class="dot"></span> Architecture Analysis</div><div class="method-badge"><span class="dot"></span> Performance Benchmarking</div><div class="method-badge"><span class="dot"></span> TCO Modeling</div><div class="method-badge"><span class="dot"></span> Strategic Positioning</div></div>
+
+  <div class="carousel-wrapper" id="teardown-carousel">
+    <div class="carousel-track">
+
+      <!-- SLIDE 1: NVIDIA -->
+      <div class="carousel-slide"><div class="teardown-full">
+        <div class="teardown-top"><h3>NVIDIA H100 / B200</h3><div class="subtitle">General-Purpose AI Accelerator · $30K–$40K (B200) · ~87% Market Share</div><p class="product-context">NVIDIA commands roughly 87% of the discrete AI GPU market.<sup class="ref">1</sup> Its Blackwell B200 features a dual-die design with 208 billion transistors and 180 GB of HBM3e at 8 TB/s bandwidth — more than doubling the H100's 80 GB at 3.35 TB/s.<sup class="ref">2</sup> NVIDIA reported ~$51.2 billion in data center revenue in Q3 FY2026 alone.<sup class="ref">3</sup> The DGX B200 system delivers 15× the inference performance and 12× lower cost compared to DGX H100 for large MoE models.<sup class="ref">4</sup></p></div>
+        <div class="teardown-body"><div class="teardown-cols"><div>
+          <div class="teardown-section"><h4>Architecture</h4><p><strong>Hopper (H100):</strong> 80 GB HBM3, 3.35 TB/s bandwidth, 4th-gen Tensor Cores with FP8. Transformer Engine. 700 W TDP.<br><br><strong>Blackwell (B200):</strong> Dual GB100 dies connected by 10 TB/s inter-die link. 2nd-gen Transformer Engine with native FP4. 180 GB HBM3e, 8 TB/s bandwidth, 1000 W TDP. 9,000 TFLOPS FP4 dense.<sup class="ref">2</sup></p></div>
+          <div class="teardown-section"><h4>What's Working</h4><ul><li><strong>CUDA ecosystem lock-in</strong> — 15+ years of software investment creates switching costs that protect market position. PyTorch, vLLM, TensorRT-LLM are all CUDA-optimized.</li><li><strong>Memory capacity enables single-GPU serving.</strong> B200's 180 GB lets you run a full 70B model at FP16 on one GPU — H100 requires tensor parallelism across two.<sup class="ref">2</sup></li><li><strong>Proven at scale</strong> — deployed across every major AI lab for both training and inference.</li></ul></div>
+        </div><div>
+          <div class="teardown-section"><h4>What I'd Change</h4><ul><li><strong>Price-performance for inference is suboptimal.</strong> At $30–40K per card,<sup class="ref">5</sup> customers pay for FP64/FP32 training capability unused during inference. Autoregressive token generation is memory-bandwidth-bound, not compute-bound — the B200's massive FLOPS are architectural overkill for this workload.</li><li><strong>Power trajectory is unsustainable.</strong> A100 (400W) → H100 (700W) → B200 (1000W) → B300 (1,400W). 24/7 inference makes every watt matter.</li><li><strong>Software stack maturity lags new hardware.</strong> Real-world B200 benchmarks showed LLM inference gains smaller than expected because vLLM and similar frameworks weren't yet stable on Blackwell.<sup class="ref">6</sup></li></ul></div>
+          <div class="teardown-section"><h4>Etched Comparison</h4><p>Etched claims an 8-chip Sohu server generates 500,000+ tokens/sec on Llama 70B vs ~23,000 for 8×H100 — roughly 22× throughput.<sup class="ref">7</sup> Etched estimates only 3.3% of H100 transistors handle the matrix multiplication that dominates transformer inference; Sohu dedicates nearly all silicon to this operation.<sup class="ref">8</sup> The question: does the CUDA ecosystem's gravity outweigh raw performance advantages?</p></div>
+        </div></div>
+        <div class="card-tags" style="margin-top:1.5rem;"><span class="tag accent">Market Leader</span><span class="tag">CUDA Moat</span><span class="tag">Power Trajectory</span><span class="tag">Memory Bottleneck</span></div>
+      </div></div></div>
+
+      <!-- SLIDE 2: Google TPU -->
+      <div class="carousel-slide"><div class="teardown-full">
+        <div class="teardown-top"><h3>Google TPU v5e / v5p</h3><div class="subtitle">Hyperscaler ASIC · Cloud-Only · Closed Ecosystem</div><p class="product-context">Google's Tensor Processing Units are the original bet on domain-specific AI acceleration. TPU v5e targets cost-efficient inference; v5p handles training in pods of up to 4,096 chips. Google co-designs models (Gemini, PaLM) with hardware, enabling optimizations third-party GPU vendors cannot match. Amazon's Trainium/Inferentia handled ~35% of new AWS AI workloads in 2025, demonstrating hyperscaler appetite for custom silicon.<sup class="ref">3</sup></p></div>
+        <div class="teardown-body"><div class="teardown-cols"><div>
+          <div class="teardown-section"><h4>Architecture</h4><p><strong>Systolic Array Design:</strong> Data flows through a grid of multiply-accumulate units, maximizing utilization for matrix operations. Each chip is purpose-built around this pattern.<br><br><strong>v5e (inference):</strong> Lower power, higher density per pod. Designed for cost-efficient inference at hyperscale.<br><br><strong>v5p (training):</strong> Higher performance, 4,096-chip pods with custom high-speed interconnect (ICI).</p></div>
+          <div class="teardown-section"><h4>What's Working</h4><ul><li><strong>Vertical integration</strong> — Google co-designs models and hardware, enabling layer-level optimizations impossible for third-party vendors.</li><li><strong>Cost efficiency at hyperscale</strong> — custom silicon economics are compelling at Google's volume. TPU v5e delivers lower cost-per-inference than H100 for supported workloads.</li><li><strong>Proof of ASIC viability</strong> — validates the strategic direction for companies like Etched building specialized chips for the broader market.</li></ul></div>
+        </div><div>
+          <div class="teardown-section"><h4>What I'd Change</h4><ul><li><strong>Closed ecosystem limits adoption.</strong> TPUs are only available via Google Cloud. No on-premise option. Multi-cloud enterprises are locked out.</li><li><strong>Software ecosystem lags NVIDIA.</strong> JAX/TensorFlow have strong TPU support, but PyTorch — the dominant framework — still has weaker TPU integration.</li><li><strong>Limited transparency.</strong> Google publishes fewer architectural details than NVIDIA, making optimization harder for external teams.</li></ul></div>
+          <div class="teardown-section"><h4>Etched Comparison</h4><p>TPU proves the technical case for AI ASICs but highlights the distribution challenge. Google's closed model leaves the broader market underserved — cloud providers, AI startups, and enterprises wanting on-premise or multi-cloud deployment have no TPU option. Etched can be "TPU for everyone else" — ASIC performance as a purchasable product without cloud lock-in.</p></div>
+        </div></div>
+        <div class="card-tags" style="margin-top:1.5rem;"><span class="tag accent">Hyperscaler ASIC</span><span class="tag">Vertical Integration</span><span class="tag">Closed Ecosystem</span><span class="tag">Distribution Gap</span></div>
+      </div></div></div>
+
+      <!-- SLIDE 3: Groq -->
+      <div class="carousel-slide"><div class="teardown-full">
+        <div class="teardown-top"><h3>Groq LPU (Language Processing Unit)</h3><div class="subtitle">Deterministic Latency · Inference-Specialized · Acquired by NVIDIA ($20B, Dec 2025)</div><p class="product-context">Groq pioneered deterministic inference — a chip where every operation's timing is known at compile time. The LPU delivered 300+ tokens/sec on Llama 2 70B, roughly 10× faster than H100 clusters.<sup class="ref">9</sup> NVIDIA acquired Groq for $20 billion on December 24, 2025 — its largest acquisition ever.<sup class="ref">10</sup> At GTC 2026, NVIDIA unveiled the Groq 3 LPU targeting 1,500 tokens/sec for agentic AI, with 40 PB/s bandwidth across 256-LPU racks.<sup class="ref">10</sup></p></div>
+        <div class="teardown-body"><div class="teardown-cols"><div>
+          <div class="teardown-section"><h4>Architecture</h4><p><strong>Temporal Computing:</strong> Operations scheduled at compile time, not runtime. Eliminates dynamic dispatch overhead. Deterministic execution — every inference takes exactly the same time.<br><br><strong>Memory:</strong> Hundreds of MB on-chip SRAM as primary weight storage (not cache). Cuts latency by feeding compute at full speed. Groq 3 LPU: 128 GB SRAM per 256-LPU rack.<sup class="ref">10</sup><br><br><strong>Scale:</strong> Running Llama 2 70B requires ~576 LPUs in coordination, creating substantial capital requirements.<sup class="ref">9</sup></p></div>
+          <div class="teardown-section"><h4>What's Working</h4><ul><li><strong>Deterministic latency.</strong> Sub-300ms time-to-first-token with zero jitter enables real-time voice, translation, and agents impossible with variable-latency GPUs.</li><li><strong>Enterprise traction.</strong> 1.9M+ developers on GroqCloud. Enterprise deployments at Dropbox, Volkswagen, Riot Games. Meta partnered for official Llama API in April 2025.<sup class="ref">9</sup></li><li><strong>$20B acquisition validates inference specialization.</strong> NVIDIA paid 7× Groq's $2.8B valuation — the clearest signal that inference optimization is strategically essential.<sup class="ref">10</sup></li></ul></div>
+        </div><div>
+          <div class="teardown-section"><h4>What I'd Change</h4><ul><li><strong>SRAM limits model size per chip.</strong> Hundreds of MB SRAM vs 180 GB HBM3e on B200 means larger models need many more chips, increasing system cost.</li><li><strong>Narrow initial use case.</strong> Deterministic latency commands premium value for real-time applications, but broader batch-inference workloads may prioritize cost-per-token over latency.</li><li><strong>Post-acquisition uncertainty.</strong> Integration into NVIDIA's stack may position Groq as a coprocessor rather than standalone, limiting independent adoption.</li></ul></div>
+          <div class="teardown-section"><h4>Etched Comparison</h4><p>The Groq acquisition reshapes the landscape. With Groq inside NVIDIA, Etched becomes the most prominent independent inference ASIC company. Their approaches differ: Groq optimized for latency determinism across architectures; Etched optimizes for throughput on transformers specifically. Etched's claimed 500,000 tok/s on Llama 70B dwarfs Groq's 300 tok/s, though Etched's numbers remain to be independently verified at scale.<sup class="ref">7, 9</sup></p></div>
+        </div></div>
+        <div class="card-tags" style="margin-top:1.5rem;"><span class="tag accent">Acquired by NVIDIA $20B</span><span class="tag">Deterministic Latency</span><span class="tag">Inference-Only</span><span class="tag">Market Validation</span></div>
+      </div></div></div>
+
+    </div>
+    <div class="carousel-nav"><div class="carousel-dots"><button class="carousel-dot active" data-slide="0"></button><button class="carousel-dot" data-slide="1"></button><button class="carousel-dot" data-slide="2"></button></div><div style="display:flex; align-items:center; gap:1rem;"><span class="slide-counter">1 / 3</span><div class="carousel-arrows"><button class="carousel-arrow" id="prev-btn" disabled>&#8592;</button><button class="carousel-arrow" id="next-btn">&#8594;</button></div></div></div>
+  </div>
+
+  <div class="callout" style="margin-top:2.5rem;"><h4>Analysis Framework: Why TCO Over Benchmark Wars</h4><p>These teardowns prioritize Total Cost of Ownership and strategic positioning over raw TFLOPS comparisons because AI infrastructure buying decisions are made on economics, not spec sheets. A chip that's 2× faster but costs 5× more and consumes 3× power loses on TCO. Understanding the full cost stack — CapEx, OpEx, switching costs, ecosystem lock-in — reveals where new entrants can compete.</p></div>
+
+  <div class="references"><h3>References</h3>
+    <ol class="ref-list">
+      <li>XMAQUINA DAO, "The Last AI Chip You'll Ever Need?" NVIDIA at ~87% discrete GPU market share. <a href="https://www.xmaquina.io/blog/the-last-ai-chip-youll-ever-need" target="_blank">xmaquina.io</a></li>
+      <li>Spheron Network, "NVIDIA B200 Complete Guide," Mar. 2026. 180 GB HBM3e, 8 TB/s, 9,000 TFLOPS FP4. MLPerf v5.0. <a href="https://www.spheron.network/blog/nvidia-b200-complete-guide/" target="_blank">spheron.network</a></li>
+      <li>BayelsaWatch, "AI Chips Statistics 2026." NVIDIA $51.2B data center revenue Q3 FY2026; Amazon chips at 35% of AWS AI workloads. <a href="https://bayelsawatch.com/ai-chips-statistics/" target="_blank">bayelsawatch.com</a></li>
+      <li>Lenovo Press, "ThinkSystem NVIDIA HGX B200 Product Guide." 15× acceleration, 12× lower cost vs H100. <a href="https://lenovopress.lenovo.com/lp2226-thinksystem-nvidia-b200-180gb-1000w-gpu" target="_blank">lenovopress.lenovo.com</a></li>
+      <li>Jarvis Labs, "NVIDIA B200 Specs and Price." Estimated $30K–$40K per unit. <a href="https://jarvislabs.ai/ai-faqs/nvidia-b200-specs" target="_blank">jarvislabs.ai</a></li>
+      <li>Lightly.ai, "NVIDIA B200 vs H100: Real-World Benchmarks." Up to 57% faster training; LLM inference gains limited by immature software. <a href="https://www.lightly.ai/blog/nvidia-b200-vs-h100" target="_blank">lightly.ai</a></li>
+      <li>Wikipedia, "Etched (company)." 8-chip Sohu: 500,000+ tok/s on Llama 70B vs ~23,000 for 8×H100. <a href="https://en.wikipedia.org/wiki/Etched_(company)" target="_blank">en.wikipedia.org</a></li>
+      <li>Tom's Hardware, "Sohu AI Chip," Jun. 2024. H100 uses only 3.3% of transistors for matrix multiplication. <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/sohu-ai-chip-claimed-to-run-models-20x-faster-and-cheaper-than-nvidia-h100-gpus" target="_blank">tomshardware.com</a></li>
+      <li>Introl, "Groq LPU Infrastructure Guide," Jan. 2026. 300 tok/s on Llama 2 70B; 1.9M+ developers; Meta partnership. <a href="https://introl.com/blog/groq-lpu-infrastructure-ultra-low-latency-inference-guide-2025" target="_blank">introl.com</a></li>
+      <li>Techzine, "Nvidia's Groq 3 LPU at GTC 2026," Mar. 2026. $20B acquisition; 1,500 tok/s target; 40 PB/s bandwidth. <a href="https://www.techzine.eu/news/infrastructure/139653/nvidias-groq-3-lpu-targets-agentic-ai-inference-at-gtc-2026/" target="_blank">techzine.eu</a></li>
+    </ol>
+  </div>
+</div>
+
+<!-- MARKET LANDSCAPE -->
+<div class="tab-panel" id="landscape">
+  <div class="section-block"><p class="section-label">Strategic Analysis</p><h2 class="section-title">AI Inference Semiconductor Market</h2><p class="section-desc">Market sizing, competitive positioning, and strategic analysis of the AI inference chip landscape. Identifying where specialized ASICs compete against incumbent GPUs.</p></div>
+
+  <div class="framework-block"><h4>Market Sizing Framework</h4><p><strong>TAM (Total Addressable Market):</strong> The global AI chip market was valued at ~$94 billion in 2025 and is projected to exceed $1 trillion by 2035 at a 28% CAGR.<sup class="ref">T1</sup> Inference workloads now account for roughly two-thirds of all AI compute, up from one-third in 2023.<sup class="ref">T2</sup><br><br><strong>SAM (Serviceable Addressable Market):</strong> The AI inference chip market specifically was valued at $31 billion in 2024, projected to reach $167 billion by 2032 at 28.25% CAGR.<sup class="ref">T3</sup> Deloitte estimates inference-optimized chips will exceed $50 billion in 2026.<sup class="ref">T2</sup><br><br><strong>SOM (Serviceable Obtainable Market):</strong> Excluding hyperscaler-captive silicon (Google TPU, Meta MTIA, Amazon Trainium/Inferentia), the accessible market for external inference vendors — cloud providers, AI startups, enterprises — is estimated at $20–30 billion annually by 2027.</p></div>
+
+  <div class="competitive-matrix">
+    <h3 style="font-size:1.1rem; margin-bottom:1rem;">Competitive Positioning Matrix</h3>
+    <div class="matrix-visual">
+      <div class="matrix-line"></div>
+      <div class="matrix-line-v"></div>
+      <div class="mlabel" style="bottom:8px; left:24px;">← General Purpose</div>
+      <div class="mlabel" style="bottom:8px; right:12px;">Specialized →</div>
+      <div class="mlabel" style="top:8px; left:24px;">↑ Higher Performance</div>
+      <div class="matrix-dot" style="left:30%; top:22%; background:#76B900;"></div>
+      <div class="matrix-dot-label" style="left:30%; top:22%; color:#76B900;">NVIDIA B200</div>
+      <div class="matrix-dot" style="left:28%; top:38%; background:#ED1C24;"></div>
+      <div class="matrix-dot-label" style="left:28%; top:38%; color:#ED1C24;">AMD MI300X</div>
+      <div class="matrix-dot" style="left:62%; top:38%; background:#4285F4;"></div>
+      <div class="matrix-dot-label" style="left:62%; top:38%; color:#4285F4;">Google TPU v5</div>
+      <div class="matrix-dot" style="left:68%; top:30%; background:#F97316;"></div>
+      <div class="matrix-dot-label" style="left:68%; top:30%; color:#F97316;">Groq LPU (→NVIDIA)</div>
+      <div class="matrix-dot" style="left:88%; top:12%; background:var(--accent);"></div>
+      <div class="matrix-dot-label" style="left:88%; top:12%; color:var(--accent); font-size:0.7rem;">Etched Sohu</div>
+      <div class="matrix-dot" style="left:35%; top:55%; background:#0071C5;"></div>
+      <div class="matrix-dot-label" style="left:35%; top:55%; color:#0071C5;">Intel Gaudi 3</div>
+      <div class="matrix-dot" style="left:55%; top:25%; background:#8B5CF6;"></div>
+      <div class="matrix-dot-label" style="left:55%; top:25%; color:#8B5CF6;">Cerebras</div>
+    </div>
+    <p style="margin-top:1rem; font-size:0.82rem; color:var(--ink-secondary); line-height:1.6;"><strong>Key insight:</strong> The market shows a clear flexibility-vs-performance tradeoff. General-purpose GPUs occupy the high-flexibility quadrant. Hyperscaler ASICs and inference startups trade flexibility for performance. Etched represents the most aggressive specialization bet. NVIDIA's Groq acquisition validates the inference-specialized category.</p>
+  </div>
+
+  <div class="section-block">
+    <p class="section-label">Porter's Five Forces</p>
+    <h2 class="section-title" style="font-size:1.4rem;">Market Structure Analysis</h2>
+    <div class="card-grid">
+      <div class="card"><h3 style="font-size:0.95rem;">Threat of New Entrants: HIGH BARRIERS</h3><p style="margin-bottom:0;">$100M+ to tape out on advanced nodes, 2–3 year design cycles, and ecosystem requirements create formidable barriers. TSMC now allocates 28%+ of wafer production to AI chips.<sup class="ref">T4</sup> Venture funding (Etched $500M, Cerebras ~$20B IPO target) has partially lowered capital barriers.</p></div>
+      <div class="card"><h3 style="font-size:0.95rem;">Supplier Power: MODERATE-HIGH</h3><p style="margin-bottom:0;">TSMC dominates advanced-node manufacturing. Etched's Sohu uses TSMC 4nm.<sup class="ref">T5</sup> Alternative fabs (Samsung, Intel Foundry) lag on leading-edge. Mutual dependency — AI chips are TSMC's fastest-growing segment — moderates power somewhat.</p></div>
+      <div class="card"><h3 style="font-size:0.95rem;">Buyer Power: MODERATE</h3><p style="margin-bottom:0;">Large buyers (hyperscalers) can threaten vertical integration — Google, Meta, Amazon, Microsoft all build custom chips. But CUDA switching costs and engineering retraining limit leverage. NVIDIA's pricing umbrella ($30–40K per B200) creates room for alternatives.</p></div>
+      <div class="card"><h3 style="font-size:0.95rem;">Threat of Substitutes: MODERATE</h3><p style="margin-bottom:0;">Software optimization (quantization, pruning, distillation) can reduce compute needs. But AI scaling laws — including test-time compute — continue driving demand. Deloitte projects compute demand will grow as inference workloads expand.<sup class="ref">T2</sup></p></div>
+      <div class="card"><h3 style="font-size:0.95rem;">Competitive Rivalry: INTENSE</h3><p style="margin-bottom:0;">NVIDIA's $20B Groq acquisition signals willingness to eliminate threats through M&A. Multiple well-funded startups and tech giants compete across positioning strategies. AMD earned ~$5.6B from AI chips in 2025.<sup class="ref">T4</sup></p></div>
+    </div>
+  </div>
+
+  <div class="callout green"><h4>Etched's Strategic Opening</h4><p><strong>Why Now?</strong> Three forces converge: (1) Transformer architecture consolidation reduces ASIC risk. (2) Inference economics — 24/7 production workloads at two-thirds of AI compute — favor cost-efficient specialized chips. (3) NVIDIA's pricing umbrella creates room for entrants with better price-performance on inference.<br><br><strong>Wedge Strategy:</strong> Target AI companies scaling transformer inference who feel GPU cost pain but lack resources for in-house ASICs. Etched raised $500M at $5B valuation in January 2026, led by Stripes with Peter Thiel and Ribbit Capital.<sup class="ref">T5</sup><br><br><strong>Key Risk:</strong> Architecture shift away from transformers. NVIDIA's Groq acquisition also enables an integrated GPU training + LPU inference stack. Etched CEO Gavin Uberti: "If transformers go away, our company dies."<sup class="ref">T6</sup></p></div>
+
+  <div class="references"><h3>References</h3>
+    <ol class="ref-list">
+      <li>Precedence Research, "AI Chip Market," Feb. 2026. $94.44B in 2025, projected $1.1T by 2035 at 27.88% CAGR. <a href="https://www.precedenceresearch.com/artificial-intelligence-chip-market" target="_blank">precedenceresearch.com</a></li>
+      <li>Deloitte Insights, "Why AI's Next Phase Will Demand More Compute," Nov. 2025. Inference ~two-thirds of compute; market >$50B in 2026. <a href="https://www.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2026/compute-power-ai.html" target="_blank">deloitte.com</a></li>
+      <li>Verified Market Research, "AI Inference Chip Market," Oct. 2025. $31B in 2024, projected $167B by 2032. <a href="https://www.verifiedmarketresearch.com/product/ai-inference-chip-market/" target="_blank">verifiedmarketresearch.com</a></li>
+      <li>BayelsaWatch, "AI Chips Statistics 2026." TSMC at 28%+ AI allocation; AMD $5.6B AI revenue. <a href="https://bayelsawatch.com/ai-chips-statistics/" target="_blank">bayelsawatch.com</a></li>
+      <li>The AI World, "Etched's $500M Sohu Chip," Jan. 2026. TSMC 4nm; $5B valuation. <a href="https://theaiworld.org/news/etcheds-500m-sohu-chip-takes-aim-at-nvidia" target="_blank">theaiworld.org</a></li>
+      <li>TechCrunch, "Etched Is Building an AI Chip That Only Runs Transformers," Jun. 2024. <a href="https://techcrunch.com/2024/06/25/etched-is-building-an-ai-chip-that-only-runs-transformer-models/" target="_blank">techcrunch.com</a></li>
+    </ol>
+  </div>
+</div>
+
+<!-- ARCHITECTURE CONVERGENCE -->
+<div class="tab-panel" id="convergence">
+  <div class="section-block"><p class="section-label">Technical Research</p><h2 class="section-title">Transformer Architecture Convergence Analysis</h2><p class="section-desc">Quantitative analysis of how transformer architectures have evolved and consolidated from 2017–2026. The key question for ASIC viability: is the market converging on a stable architecture?</p></div>
+
+  <div class="framework-block"><h4>Research Methodology</h4><p>Systematic review of 53 major language models released between 2017 and 2025, tracking architectural features: encoder/decoder structure, attention mechanisms, normalization layers, position encodings, and activation functions. Primary source: Jun Yu Tan's open dataset of publication dates and architectural specifications,<sup class="ref">A1</sup> supplemented by model cards from Hugging Face, original papers on arXiv, and technical blog posts from leading AI labs.</p></div>
+
+  <div class="section-block">
+    <p class="section-label">Key Findings</p>
+    <h2 class="section-title" style="font-size:1.4rem;">Architectural Consolidation Trends</h2>
+    <div class="card-grid">
+      <div class="card"><div class="card-icon">95%</div><h3>Decoder-Only Architecture</h3><p>~95% of major models released 2024–2026 use decoder-only transformers, up from ~60% in 2020–2022. Encoder-decoder (T5-style) and encoder-only (BERT-style) architectures have been largely abandoned for generative workloads — the workloads that drive inference demand.</p><div class="card-tags"><span class="tag accent">High Convergence</span></div></div>
+      <div class="card"><div class="card-icon">MHA</div><h3>Multi-Head Attention + KV-Sharing</h3><p>The fundamental attention mechanism from 2017 remains universal. The evolution is in KV-cache optimization: Grouped-Query Attention (GQA) and Multi-Query Attention (MQA) are now standard in production models (Llama 3, Mistral, Gemma) — reducing memory overhead during inference without quality loss.<sup class="ref">A1</sup></p><div class="card-tags"><span class="tag accent">Core Stability</span><span class="tag">GQA/MQA</span></div></div>
+      <div class="card"><div class="card-icon">RMS</div><h3>RMSNorm Standardization</h3><p>RMSNorm has displaced LayerNorm in nearly all newer model families. It drops mean-centering, making it 10–50% more computationally efficient with similar stability.<sup class="ref">A2</sup> Adopted by Llama, Mistral, Gemma, Qwen, and most open-weight models since 2023. Pre-norm convention (normalizing before attention/FFN) is now universal.</p><div class="card-tags"><span class="tag">Incremental Evolution</span></div></div>
+      <div class="card"><div class="card-icon">RoPE</div><h3>Rotary Position Embedding</h3><p>RoPE is now the dominant position encoding, replacing absolute sinusoidal and learned encodings. It encodes position via rotation matrices in the attention computation, enabling better generalization to longer sequences than seen during training.<sup class="ref">A1</sup> ALiBi survives as a niche alternative.</p><div class="card-tags"><span class="tag">Standard Practice</span></div></div>
+      <div class="card"><div class="card-icon">GLU</div><h3>SwiGLU Activation Functions</h3><p>Gated Linear Units with Swish activation have replaced ReLU/GELU in feed-forward layers. The gating mechanism improves expressiveness while keeping FLOP count roughly constant via reduced intermediate dimension (~8/3× expansion vs original 4×).<sup class="ref">A1</sup> Adopted by Llama, PaLM, Gemini, Mistral since late 2022.</p><div class="card-tags"><span class="tag">Convergent Default</span></div></div>
+      <div class="card"><div class="card-icon">MoE</div><h3>Mixture of Experts: Remaining Frontier</h3><p>MoE is the one area where architecture design remains actively experimental. Routing strategies, expert counts (8 to 256+), and granularity vary significantly (Mixtral, DeepSeek-V2, GPT-4). This is where the converged dense recipe gives way to genuine diversity — but even MoE models use transformer attention as their core primitive.<sup class="ref">A1</sup></p><div class="card-tags"><span class="tag accent">Active Experimentation</span></div></div>
+    </div>
+  </div>
+
+  <div class="framework-block" style="margin-top:2rem;"><h4>The 2023–2026 Consensus Stack</h4><p>As the analysis of 53 models documents, influential open-weight model families have converged on a de facto standard recipe: <strong>decoder-only + pre-norm RMSNorm + RoPE + SwiGLU FFN + KV-sharing attention (GQA/MQA) + bias-free layers.</strong><sup class="ref">A1</sup> This convergence partly reflects hardware-software co-optimization — FlashAttention, fused RMSNorm kernels, and fused SwiGLU kernels are well-optimized for this specific recipe, creating path dependence.<sup class="ref">A1</sup> For Etched, this is strategically important: if the recipe is stable because of hardware co-optimization, then hardware designed around this recipe has a self-reinforcing advantage.</p></div>
+
+  <div class="framework-block"><h4>Alternative Architecture Risk Assessment</h4><p><strong>State Space Models (SSMs):</strong> Mamba and S4 offer sub-quadratic scaling for long sequences, but only a handful of production models use pure SSM architectures vs. 50+ active transformer families. SSMs haven't demonstrated clear superiority on standard benchmarks.<sup class="ref">A3</sup><br><br><strong>Hybrid Architectures:</strong> Jamba (AI21) combines Mamba blocks with attention. xLSTM-7B achieves 3.5× faster training than comparable transformers.<sup class="ref">A3</sup> These hybrids still rely on attention for quality — they augment the transformer rather than eliminate it.<br><br><strong>Diffusion LLMs:</strong> Google's Gemini Diffusion explores non-autoregressive text generation. Speed advantages exist but quality gaps remain.<sup class="ref">A4</sup><br><br><strong>Overall:</strong> Alternatives face steep adoption barriers. Transformers benefit from 8+ years of optimization across hardware, software, and training recipes. Displacement requires practical superiority across diverse production tasks — a bar no alternative has cleared.</p></div>
+
+  <div class="callout"><h4>Implications for Etched's ASIC Strategy</h4><p><strong>Convergence Score: 8.5/10 (Very High)</strong><br><br>The transformer is consolidating around a narrow set of patterns. Architectural diversity has decreased markedly since 2020. MoE is the primary area of experimentation, but MoE models still use transformer attention as their core compute primitive.<br><br><strong>Risk Timeline:</strong> Short term (1–2 years): very low risk — transformer dominance accelerating. Medium term (3–5 years): low-moderate — alternatives exist but haven't proven superior at scale. Long term (5+ years): moderate — new architectures possible, but transformers are evolving too.<br><br><strong>Mitigation:</strong> Etched's 3–5 year product horizon aligns with high-confidence transformer dominance. Revenue from initial Sohu product ($500M raised, $5B valuation) can fund next-gen architectures if needed. First-mover learning on ASIC design and TSMC manufacturing creates durable advantage even if architecture eventually shifts.</p></div>
+
+  <div class="references"><h3>References</h3>
+    <ol class="ref-list">
+      <li>J. Y. Tan, "The Crystallization of Transformer Architectures (2017–2025)." 53-model analysis tracking convergence. Open dataset. <a href="https://jytan.net/blog/2025/transformer-architectures/" target="_blank">jytan.net</a></li>
+      <li>C. R. Wolfe, "Decoder-Only Transformers," Substack, 2024. RMSNorm 10–50% more efficient than LayerNorm. <a href="https://cameronrwolfe.substack.com/p/decoder-only-transformers-the-workhorse" target="_blank">cameronrwolfe.substack.com</a></li>
+      <li>P. Chojecki, "Going Beyond LLMs & Transformers," Medium, Dec. 2025. SSM and hybrid survey; xLSTM-7B 3.5× faster. <a href="https://pchojecki.medium.com/going-beyond-llms-transformers-39f3291ba9d8" target="_blank">medium.com</a></li>
+      <li>S. Raschka, "Beyond Standard LLMs," Substack, Nov. 2025. Diffusion LLMs, world models, alternative architectures. <a href="https://magazine.sebastianraschka.com/p/beyond-standard-llms" target="_blank">sebastianraschka.com</a></li>
+    </ol>
+  </div>
+</div>
+
+<!-- ACADEMIC PROJECTS -->
+<div class="tab-panel" id="projects">
+  <div class="section-block"><p class="section-label">Academic & Research</p><h2 class="section-title">Technical Projects</h2><p class="section-desc">Computational physics, machine learning, and research across biophysics and AI.</p></div>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">01</div><h3>Fine Tuning Open-Source LLMs</h3><p>PEFT of BERT via LoRA for physics text classification. Self-supervised fine-tuning of distilBERT via Masked Language Modeling. Both deployed on AWS.</p><div class="card-tags"><span class="tag">Python</span><span class="tag">LoRA</span><span class="tag">AWS</span><span class="tag">BERT</span></div></div>
+    <div class="card"><div class="card-icon">02</div><h3>Exoplanet Identification Dashboard</h3><p>Applied PCA to CNNs, SVMs, and k-NN to benchmark computational efficiency of exoplanet detection using NASA datasets. Built interactive Plotly web dashboard.</p><div class="card-tags"><span class="tag">Data Viz</span><span class="tag">Plotly</span><span class="tag">NASA Data</span></div></div>
+    <div class="card"><div class="card-icon">03</div><h3>Anderson Localization & Hofstadter Butterflies</h3><p>Group project simulating quantum lattice phenomena on Euclidean structures. Published well-documented code on GitHub for public use.</p><div class="card-tags"><span class="tag">Computational Physics</span><span class="tag">GitHub</span><span class="tag">Open Source</span></div></div>
+    <div class="card"><div class="card-icon">04</div><h3>Mechanosensing in P. aeruginosa</h3><p>Designed and iterated experimental protocols investigating bacterial surface sensing. Goal: reduce antibiotic reliance by preventing early surface attachment.</p><div class="card-tags"><span class="tag">Gordon Lab</span><span class="tag">Biophysics</span><span class="tag accent">APS 2025 Poster</span></div></div>
+  </div>
+</div>
+
+<!-- LEADERSHIP -->
+<div class="tab-panel" id="leadership">
+  <div class="section-block"><p class="section-label">Leadership & Operations</p><h2 class="section-title">Building Programs & Communities</h2><p class="section-desc">Experience coordinating stakeholders, managing logistics, and driving initiatives — skills that map to GTM operations and cross-functional program management.</p></div>
+  <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem; margin-bottom:2rem;">
+    <div style="text-align:center; padding:1.5rem; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md);"><div style="font-family:var(--font-display); font-size:2rem; color:var(--accent); margin-bottom:0.5rem;">~1K</div><div style="font-size:0.75rem; color:var(--ink-tertiary);">People engaged through outreach events</div></div>
+    <div style="text-align:center; padding:1.5rem; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md);"><div style="font-family:var(--font-display); font-size:2rem; color:var(--accent); margin-bottom:0.5rem;">30+</div><div style="font-size:0.75rem; color:var(--ink-tertiary);">Students coordinated for conference travel</div></div>
+    <div style="text-align:center; padding:1.5rem; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md);"><div style="font-family:var(--font-display); font-size:2rem; color:var(--accent); margin-bottom:0.5rem;">3 years</div><div style="font-size:0.75rem; color:var(--ink-tertiary);">Leading physics org (Secretary → President)</div></div>
+  </div>
+  <div class="card-grid">
+    <div class="card"><h3>Physics Student Organization President</h3><p>Led weekly meetings coordinating academics, research talks, career workshops across stakeholder groups. Designed mentorship program pairing undergrads with grad students. Organized group travel for 30 students (budgeting, scheduling, logistics).</p><div class="card-tags"><span class="tag">Program Management</span><span class="tag">Stakeholder Coordination</span><span class="tag">Logistics</span></div></div>
+    <div class="card"><h3>Research Committee, UT Senate</h3><p>Co-organized Capitol of Texas Undergraduate Research Conference with participants from multiple institutions. Managed cross-institutional logistics. 1 of 45 undergraduates selected university-wide.</p><div class="card-tags"><span class="tag">Event Operations</span><span class="tag">Cross-Institutional</span></div></div>
+    <div class="card"><h3>Physics Climate Faculty Committee</h3><p>Organized monthly department-wide socials. Assisted in drafting Code of Conduct. Designed surveys, analyzed responses to surface actionable insights for department leadership.</p><div class="card-tags"><span class="tag">Survey Design</span><span class="tag">Data Analysis</span><span class="tag">Stakeholder Mgmt</span></div></div>
+    <div class="card"><h3>CMHC Student Advisory Board</h3><p>Proposed improvements to website accessibility and information architecture. Conducted student interviews to design resources distributed at orientation.</p><div class="card-tags"><span class="tag">User Research</span><span class="tag">Content Strategy</span><span class="tag">Accessibility</span></div></div>
+  </div>
+</div>
+
+</main>
+
+<footer class="site-footer"><p>Rida Siddiqi · UT Austin '26</p><p><a href="mailto:siddiqirida3@gmail.com">siddiqirida3@gmail.com</a></p></footer>
+
+<script>
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+const track = document.querySelector('.carousel-track'), slides = document.querySelectorAll('.carousel-slide'), dots = document.querySelectorAll('.carousel-dot'), prevBtn = document.getElementById('prev-btn'), nextBtn = document.getElementById('next-btn'), counter = document.querySelector('.slide-counter');
+let current = 0; const total = slides.length;
+function goTo(i) { current = Math.max(0, Math.min(i, total - 1)); track.style.transform = 'translateX(-' + (current * 100) + '%)'; dots.forEach((d, idx) => d.classList.toggle('active', idx === current)); prevBtn.disabled = current === 0; nextBtn.disabled = current === total - 1; counter.textContent = (current + 1) + ' / ' + total; }
+prevBtn.addEventListener('click', () => goTo(current - 1));
+nextBtn.addEventListener('click', () => goTo(current + 1));
+dots.forEach(d => d.addEventListener('click', () => goTo(parseInt(d.dataset.slide))));
+let startX = 0; const wrapper = document.getElementById('teardown-carousel');
+wrapper.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+wrapper.addEventListener('touchend', e => { const diff = startX - e.changedTouches[0].clientX; if (Math.abs(diff) > 50) goTo(current + (diff > 0 ? 1 : -1)); });
+</script>
+</body>
+</html>
